@@ -23,6 +23,14 @@
       const height = Math.floor(screenHeight / rows);
       const left = (Object.keys(popups).length % columns) * width;
       const top = Math.floor(Object.keys(popups).length / columns) * height;
+
+      if (popupUrl.indexOf('iframe.html') > -1) {
+        const urlParams = new URLSearchParams(popupUrl.split('?')[1]);
+        const src = urlParams.get('src')
+        console.log(src);
+        popupUrl = `./iframe.html?src=${encodeURIComponent(src)}&width=${width}px&height=${height}px`;
+      } 
+
       const popup = window.open(popupUrl, '_blank', `width=${width},height=${height},left=${left},top=${top},toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no`);
       popups[popupUrl] = popup;
     }
@@ -162,10 +170,10 @@
   <ul>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=how+to+learn+javascript')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.digitalattackmap.com/')">
           <i class="fas fa-book"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=how+to+learn+javascript</span>
+        <span class="tooltiptext">https://www.digitalattackmap.com/</span>
       </div>
     </li>
     <li>
@@ -178,10 +186,10 @@
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=web+development+tutorials')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://cybermap.kaspersky.com/')">
           <i class="fas fa-laptop-code"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=web+development+tutorials</span>
+        <span class="tooltiptext">https://cybermap.kaspersky.com/</span>
       </div>
     </li>
     <li>
@@ -194,50 +202,50 @@
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=how+to+build+a+website')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://threatmap.checkpoint.com/')">
           <i class="fas fa-tools"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=how+to+build+a+website</span>
+        <span class="tooltiptext">https://threatmap.checkpoint.com/</span>
       </div>
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=cloud+computing+basics')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://fortiguard.fortinet.com/threat-map')">
           <i class="fas fa-cloud"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=cloud+computing+basics</span>
+        <span class="tooltiptext">https://fortiguard.fortinet.com/threat-map</span>
       </div>
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=artificial+intelligence+trends')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://talosintelligence.com/fullpage_maps/pulse')">
           <i class="fas fa-robot"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=artificial+intelligence+trends</span>
+        <span class="tooltiptext">https://talosintelligence.com/fullpage_maps/pulse</span>
       </div>
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=cybersecurity+tips')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://threatmap.bitdefender.com/')">
           <i class="fas fa-shield-alt"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=cybersecurity+tips</span>
+        <span class="tooltiptext">https://threatmap.bitdefender.com/</span>
       </div>
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=machine+learning+examples')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://securitycenter.sonicwall.com/m/page/worldwide-attacks')">
           <i class="fas fa-brain"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=machine+learning+examples</span>
+        <span class="tooltiptext">https://securitycenter.sonicwall.com/m/page/worldwide-attacks</span>
       </div>
     </li>
     <li>
       <div class="tooltip">
-        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=blockchain+technology+explained')">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://horizon.netscout.com/?sidebar=close')">
           <i class="fas fa-link"></i>
         </button>
-        <span class="tooltiptext">https://www.google.com/search?q=blockchain+technology+explained</span>
+        <span class="tooltiptext">https://horizon.netscout.com/?sidebar=close</span>
       </div>
     </li>
   </ul>

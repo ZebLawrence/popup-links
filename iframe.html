@@ -22,8 +22,11 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const src = urlParams.get('src');
+        const iframe = document.getElementById('contentFrame');
         if (src) {
-            document.getElementById('contentFrame').src = src;
+          iframe.src = src;
+          iframe.style.width = urlParams.get('width') || '100%';
+          iframe.style.height = urlParams.get('height') || '100%';
         } else {
             document.body.innerHTML = '<p>No source provided for iframe.</p>';
         }
