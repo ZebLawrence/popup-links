@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Links</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    const popups = {};
+
+    function handlePopup(popupUrl) {
+      if (popups[popupUrl] && !popups[popupUrl].closed) {
+        popups[popupUrl].focus();
+        return;
+      }
+      const columns = parseInt(document.getElementById('columns').value) || 4;
+      const rows = parseInt(document.getElementById('rows').value) || 3;
+      const screenWidth = window.screen.availWidth;
+      const screenHeight = window.screen.availHeight;
+      const width = Math.floor(screenWidth / columns);
+      const height = Math.floor(screenHeight / rows);
+      const left = (Object.keys(popups).length % columns) * width;
+      const top = Math.floor(Object.keys(popups).length / columns) * height;
+      const popup = window.open(popupUrl, '_blank', `width=${width},height=${height},left=${left},top=${top},toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no`);
+      popups[popupUrl] = popup;
+    }
+  </script>
+  <style>
+    body {
+      background-color: #2e2e2e;
+      color: #d3d3d3;
+      font-family: 'Roboto', sans-serif;
+      margin-left: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      background-color: #3a3a3a;
+      box-shadow: inset 0 0 10px #000000;
+      flex-direction: column;
+      display: flex;
+      width: fit-content;
+    }
+
+    li {
+      padding: 10px;
+    }
+
+    .icon-button {
+      cursor: pointer;
+      font-size: 30px;
+      width: 50px;
+      height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #d3d3d3;
+      border-radius: 5px;
+      padding: 10px;
+      background: none;
+      color: #d3d3d3;
+      filter: drop-shadow(2px 4px 2px #000000);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    .icon-button:hover {
+      transform: scale(1.15) rotate(5deg);
+      filter: drop-shadow(4px 8px 4px #000000);
+    }
+    
+    .icon-button:active {
+      filter: drop-shadow(1px 2px 1px #000000);
+      transform: scale(0.95);
+    }
+
+    .select-menu {
+      background-color: #3a3a3a;
+      color: #d3d3d3;
+      border: 2px solid #d3d3d3;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .select-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      max-width: 300px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 105%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent #555 transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Links to Open Popups</h1>
+  <div class="select-container">
+    <label for="columns">Columns:</label>
+    <select id="columns" class="select-menu">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4" selected>4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+    <label for="rows">Rows:</label>
+    <select id="rows" class="select-menu">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3" selected>3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+  </div>
+  <ul>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=how+to+learn+javascript')">
+          <i class="fas fa-book"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=how+to+learn+javascript</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./eclipse.html')">
+          <i class="fas fa-moon"></i>
+        </button>
+        <span class="tooltiptext">./eclipse.html</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=web+development+tutorials')">
+          <i class="fas fa-laptop-code"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=web+development+tutorials</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=latest+tech+news')">
+          <i class="fas fa-newspaper"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=latest+tech+news</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=how+to+build+a+website')">
+          <i class="fas fa-tools"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=how+to+build+a+website</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=cloud+computing+basics')">
+          <i class="fas fa-cloud"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=cloud+computing+basics</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=artificial+intelligence+trends')">
+          <i class="fas fa-robot"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=artificial+intelligence+trends</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=cybersecurity+tips')">
+          <i class="fas fa-shield-alt"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=cybersecurity+tips</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=machine+learning+examples')">
+          <i class="fas fa-brain"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=machine+learning+examples</span>
+      </div>
+    </li>
+    <li>
+      <div class="tooltip">
+        <button class="icon-button" onclick="handlePopup('./iframe.html?src=https://www.google.com/search?q=blockchain+technology+explained')">
+          <i class="fas fa-link"></i>
+        </button>
+        <span class="tooltiptext">https://www.google.com/search?q=blockchain+technology+explained</span>
+      </div>
+    </li>
+  </ul>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Eclipse Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #87CEEB; /* Bright blue */
+            align-items: center;
+            height: 100vh;
+            transition: all 2.5s;
+            animation: changeBackground 15s linear infinite;
+        }
+
+        .eclipse-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .sun {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ffcc00, #ff9900);
+            border-radius: 50%;
+        }
+
+        .moon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 98%;
+            height: 98%;
+            background: #c0dde4;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: moveMoon 15s linear infinite, changeMoonColor 15s linear infinite;
+        }
+
+        @keyframes moveMoon {
+            0% {
+                transform: translate(-250%, -50%);
+            }
+            50% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(250%, 50%);
+            }
+        }
+
+        @keyframes changeBackground {
+            30% {
+                background-color: #87CEEB; /* Bright blue */
+            }
+            50% {
+                background-color: #000000; /* Black */
+            }
+            70% {
+                background-color: #87CEEB; /* Bright blue */
+            }
+        }
+
+        @keyframes changeMoonColor {
+            30% {
+                background-color: #c0dde4; /* Light grey */
+            }
+            50% {
+                background-color: #000; /* Black */
+            }
+            70% {
+                background-color: #c0dde4; /* Light grey */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="eclipse-container">
+        <div class="sun"></div>
+        <div class="moon"></div>
+    </div>
+</body>
+</html>
